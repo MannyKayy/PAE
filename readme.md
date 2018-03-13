@@ -22,7 +22,7 @@ In *setup.py* you can find general settings for multiple *datasets*. Currently, 
 * **low_dim_embed**: 10 isotropic Gaussians in 10d space are embedded into 1000d space.
 * **color_mnist**: random digits on MNIST are stacked to create color digits.
 
-Each dataset is associated to an architecture setup of generator, discriminator, and encoder.
+Each dataset is associated to an architecture setup of generator, discriminator and encoder.
 
 2. **Training**
 
