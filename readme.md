@@ -11,6 +11,9 @@ This repository contains the implementation of [Plummer Autoencoders](https://ar
 7. Adversarial AutoEncoder (aae)
 8. Adversarial Variational Bayes with Adaptive Contrast (avbac)
 
+### Animation on Stacked MNIST
+
+<img src='animations/cmnist.gif'>
 
 ### How to run the code
 
