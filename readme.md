@@ -13,7 +13,7 @@ This repository contains the implementation of [Plummer Autoencoders](https://ar
 
 ### Animation on Stacked MNIST
 
-<img src='animations/cmnist.gif' width=300px>
+<img src='animations/cmnist.gif' width=400px>
 
 ### How to run the code
 
