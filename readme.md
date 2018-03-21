@@ -22,13 +22,12 @@ We generate samples during the training of PAE.
 
 1. **Setup**
 
-In *setup.py* you can find general settings for multiple *datasets*. Supported datasets are:
+*setup.py* contains the general settings for different *datasets* (e.g. the architecture of generator, discriminator and encoder). 
+Supported datasets are:
 
 * **grid**: 25 Gaussians are uniformly distributed in a grid.
 * **low_dim_embed**: 10 isotropic Gaussians in 10d space are embedded into 1000d space.
 * **color_mnist**: random digits on MNIST are stacked to create color digits.
-
-For each dataset we define the architecture of generator, discriminator and encoder.
 
 2. **Training**
 
