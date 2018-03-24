@@ -15,7 +15,7 @@ of all methods:
 
 ### Demos
 
-We generate samples during the training of PAE (code for CIFAR-100 will be available soon)
+We generate samples during the training of PAE (code for CIFAR-100 will be available soon).
 
 | Stacked MNIST | CIFAR-100 |
 |----|----|
