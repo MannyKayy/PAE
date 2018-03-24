@@ -31,7 +31,7 @@ class Evaluator:
             Each distribution has it own data visualization
         '''
         working_dir = self.model.working_dir
-        data_dist.visualize(gen_data, save_path=os.path.join(working_dir,'figure/') + DATASET + '-' + str(ckpt_id) + '.png')
+        data_dist.visualize(gen_data, save_path=os.path.join(working_dir,'figure', DATASET + '-' + str(ckpt_id) + '.png'))
     
     def visualize_closest(self, test_data, gen_data, ckpt_id):
         '''
@@ -39,7 +39,7 @@ class Evaluator:
             Each distribution has it own data visualization
         '''
         working_dir = self.model.working_dir
-        data_dist.visualize(gen_data, test_data, save_path=os.path.join(working_dir,'figure/') + DATASET + '-nr-' + str(ckpt_id) + '.png')
+        data_dist.visualize(gen_data, test_data, save_path=os.path.join(working_dir,'figure', DATASET + '-nr-' + str(ckpt_id) + '.png'))
 
     def compute_log_likelihood(self, val_gen_data, gen_data, ckpt_id, batch_size=10000):
         # perform cross validation on val data to select kernel bandwidth
@@ -204,12 +204,12 @@ class Evaluator:
                     #---------------------------------------------------------------#
                     print('\nClassifying generated data at iter %d'%(id))
                     gen_data = model.decode(noise_dist.sample(10000))
-                    predictions = self.classify_low_dim_embed('classification/low_dim_embed/model', gen_data)
+                    predictions = self.classify_low_dim_embed(os.path.join('classification','low_dim_embed','model'), gen_data)
                     hist,_ = np.histogram(predictions)
                     log['hist'] = hist
                     if not os.path.exists(os.path.join(args.working_dir,'others')):
                         os.makedirs(os.path.join(args.working_dir,'others'))
-                    path = os.path.join(args.working_dir,'others/hist_modes.pkl')
+                    path = os.path.join(args.working_dir,'others','hist_modes.pkl')
                     with open(path,'wb') as f:
                         pickle.dump(log,f)
 
@@ -221,7 +221,7 @@ class Evaluator:
                     hist = 0
                     for i in range(100):
                         gen_data = model.decode(noise_dist.sample(10000))
-                        predictions = self.classify_cmnist('classification/color_mnist/model', gen_data)
+                        predictions = self.classify_cmnist(os.path.join('classification','color_mnist','model'), gen_data)
                         h,_ = np.histogram(predictions, bins=1000)
                         hist = hist + h
                     print('number of class having 0 samples %d'%np.sum(hist==0))
@@ -230,7 +230,7 @@ class Evaluator:
                     log['hist'] = hist
                     if not os.path.exists(os.path.join(args.working_dir,'others')):
                         os.makedirs(os.path.join(args.working_dir,'others'))
-                    path = os.path.join(args.working_dir,'others/hist_modes.pkl')
+                    path = os.path.join(args.working_dir,'others','hist_modes.pkl')
                     with open(path,'wb') as f:
                         pickle.dump(log,f)
                 
@@ -249,7 +249,7 @@ class Evaluator:
                     # compute FID                                                   #
                     #---------------------------------------------------------------#
                     print('\nComputing FID at iter %d'%(id))
-                    path = 'utils/inception_statistics/color_mnist'
+                    path = os.path.join('utils','inception_statistics','color_mnist')
                     if not os.path.isdir(path):
                         os.mkdir(path)
                     f = os.path.join(path,'real_statistics')
@@ -263,7 +263,7 @@ class Evaluator:
                         # reshape data before passing to inception net
                         images = self.reshape_cmnist(data)
                         images = np.round(images*255)
-                        real_mu, real_sigma = self.compute_fid(images, 'utils/inception-2015-12-05/classify_image_graph_def.pb')
+                        real_mu, real_sigma = self.compute_fid(images, os.path.join('utils','inception-2015-12-05','classify_image_graph_def.pb'))
                         np.savez(f, mu=real_mu, sigma=real_sigma)
                     else:
                         npzfile = np.load(f)
@@ -273,7 +273,7 @@ class Evaluator:
                     # reshape data before passing to inception net
                     images = self.reshape_cmnist(gen_data)
                     images = np.round(images*255)
-                    gen_mu, gen_sigma = self.compute_fid(images, 'utils/inception-2015-12-05/classify_image_graph_def.pb')
+                    gen_mu, gen_sigma = self.compute_fid(images, os.path.join('utils','inception-2015-12-05','classify_image_graph_def.pb'))
                     fid_value = fid.calculate_frechet_distance(gen_mu, gen_sigma, real_mu, real_sigma)
                     print("FID: %s" % fid_value)
 
@@ -326,7 +326,7 @@ if __name__ == '__main__':
     elif DATASET == 'low_dim_embed':
         data_dist = LowDimEmbed()
     elif DATASET == 'color_mnist':
-        data_dist = CMNIST('data/mnist')
+        data_dist = CMNIST(os.path.join('data','mnist'))
         
     if METHOD == 'pae':
         from pae import PAE

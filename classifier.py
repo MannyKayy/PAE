@@ -22,7 +22,7 @@ def load_model(working_dir, sess):
 
 def save_model(working_dir, sess):
     saver = tf.train.Saver()
-    path = os.path.join(working_dir, 'model/saved-model')
+    path = os.path.join(working_dir, 'model','saved-model')
     save_path = saver.save(sess, path)
 
 class CNN_CLF:
@@ -216,7 +216,7 @@ if __name__ == '__main__':
         data_dist = LowDimEmbed()
         clf = MLP_CLF(data_dist, ARCH_MLP)
     elif args.db == 'color_mnist':
-        data_dist = CMNIST('data/mnist')
+        data_dist = CMNIST(os.path.join('data','mnist'))
         clf = CNN_CLF(data_dist, 28, 28, 3, 1000)
 
     clf.create_model()

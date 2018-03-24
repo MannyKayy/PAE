@@ -205,7 +205,7 @@ class CoulombGAN:
         saver = tf.train.Saver()
         path = os.path.join(self.working_dir, 'model')
         if ckpt_id:
-            ckpt =  path + '/saved-model-' + str(ckpt_id)
+            ckpt =  os.path.join(path,'saved-model-' + str(ckpt_id))
             saver.restore(sess, ckpt)
             print('\nLoaded %s\n'%ckpt)
         else:
@@ -217,17 +217,17 @@ class CoulombGAN:
 
     def save_model(self, sess):
         saver = tf.train.Saver()
-        path = os.path.join(self.working_dir, 'model/saved-model')
+        path = os.path.join(self.working_dir, 'model','saved-model')
         save_path = saver.save(sess, path, global_step=self.global_step.eval()+1)
         print('\nModel saved in %s'%save_path)
     
     def save_log(self,log):
-        path = os.path.join(self.working_dir,'model/log.pkl')
+        path = os.path.join(self.working_dir,'model','log.pkl')
         with open(path,'wb') as f:
             pickle.dump(log,f)
 
     def load_log(self,log):
-        path = os.path.join(self.working_dir,'model/log.pkl')
+        path = os.path.join(self.working_dir,'model','log.pkl')
         if os.path.exists(path):
             with open(path,'rb') as f:
                 data = pickle.load(f)
@@ -310,7 +310,7 @@ class CoulombGAN:
                     plt.title('Encoder cost')
                     plt.xlabel('Iterations/100')
                     path = os.path.join(self.working_dir,'figure')
-                    plt.savefig(path+'/train-'+str(self.global_step.eval()+1)+'.png',bbox_inches='tight',dpi=800)
+                    plt.savefig(os.path.join(path,'train-'+str(self.global_step.eval()+1)+'.png',bbox_inches='tight',dpi=800))
                     plt.close()
                     # save model & log
                     self.save_log(log)
@@ -327,7 +327,7 @@ def run(args):
         flags.EXPONENTIAL_DECAY = True
         data_dist = LowDimEmbed()
     elif DATASET == 'color_mnist':
-        data_dist = CMNIST('data/mnist')
+        data_dist = CMNIST(os.path.join('data','mnist'))
     
     noise_dist = NormalNoise(flags.NOISE_DIM)
     model = CoulombGAN(data_dist, noise_dist, flags, args)
