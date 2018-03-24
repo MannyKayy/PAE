@@ -1,6 +1,6 @@
 
 # Plummer AutoEncoder (PAE)
-This repository contains the implementation of paper [Plummer Autoencoders](https://arxiv.org/abs/1802.03505).
+This repository contains the Tensorflow implementation of paper [Plummer Autoencoders](https://arxiv.org/abs/1802.03505).
 We provide the implementation of the following methods to guarantee that all results are reproducible:
 
 1. Plummer AutoEncoder (pae)
@@ -25,9 +25,9 @@ We generate samples during the training of PAE.
 *setup.py* contains the general settings for different *datasets* (e.g. the architecture of generator, discriminator and encoder). 
 Supported datasets are:
 
-* **grid**: 25 Gaussians are uniformly distributed in a grid.
-* **low_dim_embed**: 10 isotropic Gaussians in 10d space are embedded into 1000d space.
-* **color_mnist**: random digits on MNIST are stacked to create color digits.
+* **grid**: 25 Gaussians distributed uniformly on a grid.
+* **low_dim_embed**: 10 10d isotropic Gaussians embedded into 1000d space.
+* **color_mnist**: MNIST digits stacked on top of each other to create color digits.
 
 2. **Training**
 
