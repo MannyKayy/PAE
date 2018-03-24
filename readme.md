@@ -1,7 +1,8 @@
 
 # Plummer AutoEncoder (PAE)
-This repository contains the Tensorflow implementation of paper [Plummer Autoencoders](https://arxiv.org/abs/1802.03505).
-We provide the implementation of the following methods to guarantee that all results are reproducible:
+This repository contains the implementation of paper [Plummer Autoencoders](https://arxiv.org/abs/1802.03505).
+To guarantee the reproducibility of all results, we provide the implementation 
+of all methods:
 
 1. Plummer AutoEncoder (pae)
 2. Wasserstein GAN with Gradient Penalty (wgan)
@@ -17,6 +18,11 @@ We provide the implementation of the following methods to guarantee that all res
 We generate samples during the training of PAE.
 
 <img src='animations/cmnist.gif' width=400px>
+
+### Requirements
+
+The implementation was developed in Python 2.7 using Tensorflow 1.2, but should work with
+any version of Python and Tensorflow 1.0+. Additional libraries are tqdm and tarfile.
 
 ### How to run the code
 
@@ -95,3 +101,8 @@ python evaluate.py --method pae --db color_mnist --working_dir pae/color_mnist -
 ### More information
 1. Type: ```python train.py --help```
 2. Contact us
+
+### Licensing
+
+The code is provided "as-is" under the terms of General Public License v2. 
+See ```LICENSE.txt``` for full details.
