@@ -13,11 +13,15 @@ of all methods:
 7. Adversarial AutoEncoder (aae)
 8. Adversarial Variational Bayes with Adaptive Contrast (avbac)
 
-### Animation on Stacked MNIST
+### Demos
 
-We generate samples during the training of PAE.
+We generate samples during the training of PAE (code for CIFAR-100 will be available soon).
 
-<img src='animations/cmnist.gif' width=400px>
+| Stacked MNIST | CIFAR-100 |
+|----|----|
+|<img src='animations/cmnist.gif' width=400px>|<img src='animations/cifar.gif' width=400px>
+
+
 
 ### Requirements
 
