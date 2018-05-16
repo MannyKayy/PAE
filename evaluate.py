@@ -16,7 +16,6 @@ import matplotlib.pyplot as plt
 if 'Linux' in platform.platform():
     plt.switch_backend('agg')
 
-NOISE_PERTURB = 0.005
 SEED = 100
 
 class Evaluator:
@@ -424,6 +423,7 @@ if __name__ == '__main__':
     DATASET = args.db
     flags = SETUP(DATASET)
     noise_dist = UniformNoise(flags.NOISE_DIM)
+    NOISE_PERTURB = 0.01
 
     if DATASET == 'grid':
         data_dist = Grid()
@@ -433,6 +433,7 @@ if __name__ == '__main__':
         data_dist = CMNIST(os.path.join('data','mnist'))
     elif DATASET == 'cifar_100':
         data_dist = CIFAR100(os.path.join('data','cifar-100'))
+        NOISE_PERTURB = 0.005
     if METHOD == 'pae':
         from pae import PAE
         model = PAE(data_dist, noise_dist, flags, args)
